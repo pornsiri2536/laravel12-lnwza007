@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// -----------------------
+// หน้าแรก Inertia
+// -----------------------
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
@@ -15,44 +18,70 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
-Route::get("/homepage", function() {
- 	return "<h1>This is home page</h1>" ;
-});
-Route::get("/blog/{id}", function($id) {
-     return "<h1>This is blog page : {$id} </h1>" ;
-});
-Route::get("/myorder/create", function() {
- 	return "<h1>This is order form page : ". request("username") ."</h1>" ;
 
-});
-Route::get("/hello", function () {	
-return view("hello");
-});
-Route::get( "/gallery" , function(){
-	$ant = "https://cdn3.movieweb.com/i/article/Oi0Q2edcVVhs4p1UivwyyseezFkHsq/1107:50/Ant-Man-3-Talks-Michael-Douglas-Update.jpg";
-$bird = "https://images.indianexpress.com/2021/03/falcon-anthony-mackie-1200.jpg"; 
-$cat = "http://www.onyxtruth.com/wp-content/uploads/2017/06/black-panther-movie-onyx-truth.jpg";
-$god = "https://www.blackoutx.com/wp-content/uploads/2021/04/Thor.jpg"; 
-$spider = "https://icdn5.digitaltrends.com/image/spiderman-far-from-home-poster-2-720x720.jpg"; 
+// -----------------------
+// Route เบื้องต้น
+// -----------------------
+Route::get("/homepage", fn() => "<h1>This is home page</h1>");
+Route::get("/blog/{id}", fn($id) => "<h1>This is blog page : {$id}</h1>");
+Route::get("/myorder/create", fn() => "<h1>This is order form page : " . request("username") . "</h1>");
+Route::get("/hello", fn() => view("hello"));
 
-return view("test/index", compact("ant","bird","cat","god","spider") );
-});
+// -----------------------
+// Gallery Routes
+// -----------------------
+Route::prefix('gallery')->group(function () {
+    Route::get('/', function () {
+        $ant = "https://cdn3.movieweb.com/i/article/Oi0Q2edcVVhs4p1UivwyyseezFkHsq/1107:50/Ant-Man-3-Talks-Michael-Douglas-Update.jpg";
+        $bird = "https://images.indianexpress.com/2021/03/falcon-anthony-mackie-1200.jpg"; 
+        $cat = "http://www.onyxtruth.com/wp-content/uploads/2017/06/black-panther-movie-onyx-truth.jpg";
+        $god = "https://www.blackoutx.com/wp-content/uploads/2021/04/Thor.jpg"; 
+        $spider = "https://icdn5.digitaltrends.com/image/spiderman-far-from-home-poster-2-720x720.jpg";
+        return view("test/index", compact("ant", "bird", "cat", "god", "spider"));
+    });
 
-Route::get("/gallery/ant", function () {
-    $ant = "https://cdn3.movieweb.com/i/article/Oi0Q2edcVVhs4p1UivwyyseezFkHsq/1107:50/Ant-Man-3-Talks-Michael-Douglas-Update.jpg";
-    return view("test/ant", compact("ant"));
-});
+    Route::get('/ant', fn() => view("test/ant", [
+        'ant' => "https://cdn3.movieweb.com/i/article/Oi0Q2edcVVhs4p1UivwyyseezFkHsq/1107:50/Ant-Man-3-Talks-Michael-Douglas-Update.jpg"
+    ]));
 
-Route::get("/gallery/bird", function () {
-    $bird = "https://images.indianexpress.com/2021/03/falcon-anthony-mackie-1200.jpg";
-    return view("test/bird", compact("bird"));
-});
+    Route::get('/bird', fn() => view("test/bird", [
+        'bird' => "https://images.indianexpress.com/2021/03/falcon-anthony-mackie-1200.jpg"
+    ]));
 
-Route::get("/gallery/cat", function () {
-    $cat = "http://www.onyxtruth.com/wp-content/uploads/2017/06/black-panther-movie-onyx-truth.jpg";
-    return view("test/cat", compact("cat"));
+    Route::get('/cat', fn() => view("test/cat", [
+        'cat' => "http://www.onyxtruth.com/wp-content/uploads/2017/06/black-panther-movie-onyx-truth.jpg"
+    ]));
 });
 
+// -----------------------
+// Template views (Blade ธรรมดา)
+// -----------------------
+Route::view("/teacher", "teacher");
+Route::view("/student", "student");
+Route::view("/theme", "theme");
 
+// -----------------------
+// Active Template routes
+// -----------------------
+Route::prefix('active')->group(function () {
+    Route::view('/index', 'active.index')->name('index');
+    Route::view('/about', 'active.about')->name('about');
+    Route::view('/services', 'active.services')->name('services');
+    Route::view('/portfolio', 'active.portfolio')->name('portfolio');
+    Route::view('/team', 'active.team')->name('team');
+    Route::view('/blog', 'active.blog')->name('blog');
+    Route::view('/contact', 'active.contact')->name('contact');
 
+    // ✅ Route แสดงข้อมูลครูจาก JSON
+    Route::get('/teacher', function () {
+        $teachers = json_decode(file_get_contents(
+            'https://raw.githubusercontent.com/arc6828/laravel8/main/public/json/teachers.json'
+        ));
+        return view("active.teacher", compact("teachers"));
+    })->name('active.teacher');
+});
 
+// -----------------------
+// Test Route
+// -----------------------
+Route::view('/test', 'test')->name('test');
