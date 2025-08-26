@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>{{ $newsItem->title }}</title>
+    <title>{{ $tourism->title }}</title>
     <style>
         body { font-family: Tahoma, sans-serif; margin: 20px; }
         img { width: 400px; border-radius: 10px; margin-bottom: 20px; }
@@ -10,9 +10,9 @@
     </style>
 </head>
 <body>
-    <h1>{{ $newsItem->title }}</h1>
-    <img src="{{ asset('images/'.$newsItem->image) }}" alt="{{ $newsItem->title }}">
-    <p>{{ $newsItem->content }}</p>
+    <h1>{{ $tourism->title }}</h1>
+    <img src="{{ asset('images/'.$tourism->image) }}" alt="{{ $tourism->title }}">
+    <p>{{ $tourism->content }}</p>
     <a href="{{ route('tourism.index') }}">⬅ กลับไปหน้าหลัก</a>
 </body>
 </html><!DOCTYPE html>

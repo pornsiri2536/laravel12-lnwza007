@@ -116,8 +116,10 @@ Route::get('barchart', function () {
 // -----------------------
 // Tourism Routes (Pathumthani)
 // -----------------------
-use App\Http\Controllers\TourismController;
-Route::get('/tourism/{id}', [TourismController::class, 'showTourism']);
+Route::get('/tourism', [TourismController::class, 'index'])->name('tourism.index');
+Route::get('/tourism/show/{id}', [TourismController::class, 'show'])->name('tourism.show');
+use App\Http\Controllers\NewsController;
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 
 
 

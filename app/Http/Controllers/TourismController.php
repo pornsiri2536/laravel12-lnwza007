@@ -37,11 +37,11 @@ class TourismController extends Controller
     }
 
     // App\Http\Controllers\TourismController.php
-public function showTourism($id)
-{
-    $tourism = TourismNews::findOrFail($id);
-    return view('tourism.show', compact('tourism'));
-}
+    public function show($id)
+    {
+        $tourism = TourismNews::findOrFail($id);
+        return view('tourism.show', compact('tourism'));
+    }
 
     }
 
