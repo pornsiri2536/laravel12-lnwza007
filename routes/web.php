@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TourismController;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -115,9 +116,16 @@ Route::get('barchart', function () {
 // -----------------------
 // Tourism Routes (Pathumthani)
 // -----------------------
-use App\Http\Controllers\TourismController;
+Route::get('/tourism', [TourismController::class, 'showTourism']);
+use App\Http\Controllers\NewsController;
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 
-Route::get('/tourism', [TourismController::class, 'index']);
+
+
+
+
+
+
 
 
 

@@ -3,16 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Place;
 use App\Models\News;
 
 class TourismController extends Controller
 {
     public function index()
     {
-        $places = Place::all();
+        // ดึงข้อมูลทั้งหมดจากตาราง news
         $news = News::orderBy('published_at', 'desc')->get();
+        return view('tourism.index', compact('news'));
+    }
 
-        return view('tourism.index', compact('places', 'news'));
+    public function show($id)
+    {
+        // ดึงข้อมูล 1 รายการจากตาราง news
+        $newsItem = News::findOrFail($id);
+        return view('tourism.show', compact('newsItem'));
     }
 }
