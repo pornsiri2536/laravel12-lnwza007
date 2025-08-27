@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <title>รายการท่องเที่ยว</title>
-</head>
-<body>
-    <h1>รายการสถานที่ท่องเที่ยว</h1>
-    <ul>
-        @foreach($tourisms as $item)
-            <li>
-                <a href="{{ route('tourism.show', $item->id) }}">
-                    {{ $item->title }}
-                </a>
-            </li>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <h1 class="text-center my-4">🌸 สถานที่ท่องเที่ยวประเทศไทย 🌸</h1>
+
+    <div class="row">
+        @foreach($places as $place)
+            <div class="col-md-4 mb-4">
+                <div class="card shadow h-100">
+                    @if($place->image)
+                        <img src="{{ url("/images/tourism/$place->image") }}" alt="{{ $place->name }}" class="tourism-image">
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $place->name }}</h5>
+                        <p class="card-text text-truncate">{{ $place->description }}</p>
+                        <a href="{{ route('tourism.show', $place->id) }}" class="btn btn-primary">ดูรายละเอียด</a>
+                    </div>
+                </div>
+            </div>
         @endforeach
-    </ul>
-</body>
-</html>
+    </div>
+</div>
+@endsection

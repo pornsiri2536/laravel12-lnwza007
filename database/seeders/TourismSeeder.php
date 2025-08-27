@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TourismSeeder extends Seeder
 {
@@ -16,24 +16,83 @@ class TourismSeeder extends Seeder
         DB::table('tourism_places')->insert([
             [
                 "name" => "วัดเจดีย์หอย",
-                "image" => "https://www.tripgether.com/wp-content/uploads/2024/08/jedeehoi-13-2.jpg",
-                "description" => "วัดที่มีเจดีย์สร้างจากซากหอยอายุหลายล้านปี ภายในวัดยังมีพิพิธภัณฑ์ซากหอยโบราณและพื้นที่ให้กราบไหว้พระพุทธรูปอันศักดิ์สิทธิ์ เป็นแลนด์มาร์กสำคัญของจังหวัดปทุมธานี",
-                "created_at" => now(),
-                "updated_at" => now(),
+                "description" => "วัดเก่าแก่มีเจดีย์สร้างจากเปลือกหอยนับล้านชิ้น อายุหลายล้านปี",
+                "location" => "อำเภอเมืองปทุมธานี",
+                "image_url" => "https://www.tripgether.com/wp-content/uploads/2024/08/jedeehoi-2.jpg",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "Dream World",
+                "description" => "สวนสนุกระดับประเทศ มีกิจกรรมและเครื่องเล่นหลากหลาย",
+                "location" => "อำเภอธัญบุรี",
+                "image_url" => "https://www.paiduaykan.com/travel/wp-content/uploads/2021/06/7-SON04090.jpg",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
             ],
             [
                 "name" => "ตลาดน้ำคลองลัดมะยม",
-                "image" => "https://cms.dmpcdn.com/travel/2024/07/08/1909ef30-3cea-11ef-be17-cd34bf335bbe_webp_original.webp",
-                "description" => "ตลาดน้ำชื่อดังใกล้กรุงเทพฯ มีอาหารพื้นบ้านอร่อย ของฝากมากมาย ผักผลไม้สดจากสวน และกิจกรรมนั่งเรือชมบรรยากาศริมน้ำ เหมาะสำหรับมาเที่ยวกับครอบครัว",
-                "created_at" => now(),
-                "updated_at" => now(),
+                "description" => "สัมผัสวิถีชีวิตริมน้ำ ชิมอาหารพื้นบ้านและซื้อของฝาก",
+                "location" => "อำเภอเมืองปทุมธานี",
+                "image_url" => "https://www.paiduaykan.com/travel/wp-content/uploads/2021/06/3-SON03822.jpg",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
             ],
             [
                 "name" => "พิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ",
-                "image" => "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Khlong_Ha%2C_Khlong_Luang_District%2C_Pathum_Thani_12120%2C_Thailand_-_panoramio.jpg/500px-Khlong_Ha%2C_Khlong_Luang_District%2C_Pathum_Thani_12120%2C_Thailand_-_panoramio.jpg",
-                "description" => "แหล่งเรียนรู้ด้านวิทยาศาสตร์ที่ใหญ่ที่สุดในประเทศไทย ภายในมีนิทรรศการแบบ Interactive การทดลองวิทยาศาสตร์ และกิจกรรมเสริมทักษะ เหมาะสำหรับครอบครัวและนักเรียน",
-                "created_at" => now(),
-                "updated_at" => now(),
+                "description" => "เรียนรู้เทคโนโลยีและวิทยาศาสตร์แบบสนุกสนานทั้งเด็กและผู้ใหญ่",
+                "location" => "อำเภอคลองหลวง",
+                "image_url" => "https://www.paiduaykan.com/travel/wp-content/uploads/2021/06/5-SON03988.jpg",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "สวนพฤกษศาสตร์",
+                "description" => "เดินชมสวนพฤกษศาสตร์และพันธุ์ไม้หายาก",
+                "location" => "อำเภอคลองหลวง",
+                "image_url" => "https://picsum.photos/id/101/600/400",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "สะพานพระราม 5",
+                "description" => "แลนด์มาร์คสำคัญของจังหวัด ชมวิวแม่น้ำเจ้าพระยา",
+                "location" => "อำเภอเมืองปทุมธานี",
+                "image_url" => "https://picsum.photos/id/102/600/400",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "ตลาดร้อยปีวัดเสด็จ",
+                "description" => "ตลาดเก่าแก่ แหล่งรวมของกินและของฝากพื้นบ้าน",
+                "location" => "อำเภอเมืองปทุมธานี",
+                "image_url" => "https://picsum.photos/id/103/600/400",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "สวนสุขภาพปทุมธานี",
+                "description" => "สถานที่ออกกำลังกายและพักผ่อน เหมาะกับทุกวัย",
+                "location" => "อำเภอเมืองปทุมธานี",
+                "image_url" => "https://picsum.photos/id/104/600/400",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "วัดโบสถ์",
+                "description" => "วัดเก่าแก่ มีสถาปัตยกรรมไทยโบราณและงานประติมากรรมสวยงาม",
+                "location" => "อำเภอสามโคก",
+                "image_url" => "https://picsum.photos/id/105/600/400",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
+            ],
+            [
+                "name" => "ฟาร์มโชคชัย ปทุมธานี",
+                "description" => "ฟาร์มโคนมและกิจกรรมท่องเที่ยวเชิงเกษตร สำหรับครอบครัว",
+                "location" => "อำเภอคลองหลวง",
+                "image_url" => "https://picsum.photos/id/106/600/400",
+                "created_at" => Carbon::now(),
+                "updated_at" => Carbon::now(),
             ],
         ]);
     }

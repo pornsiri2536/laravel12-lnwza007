@@ -1,30 +1,17 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $tourism->title }}</title>
-    <style>
-        body { font-family: Tahoma, sans-serif; margin: 20px; }
-        img { width: 400px; border-radius: 10px; margin-bottom: 20px; }
-        a { display: inline-block; margin-top: 20px; color: blue; font-weight: bold; text-decoration: none; }
-    </style>
-</head>
-<body>
-    <h1>{{ $tourism->title }}</h1>
-    <img src="{{ asset('images/'.$tourism->image) }}" alt="{{ $tourism->title }}">
-    <p>{{ $tourism->content }}</p>
-    <a href="{{ route('tourism.index') }}">⬅ กลับไปหน้าหลัก</a>
-</body>
-</html><!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $tourism->title }}</title>
-</head>
-<body>
-    <h1>{{ $tourism->title }}</h1>
-    <p>{{ $tourism->description }}</p>
-    <a href="{{ route('tourism.index') }}">ย้อนกลับ</a>
-</body>
-</html>
+@extends('layouts.app')
 
+@section('content')
+<div class="container my-4">
+    <div class="card shadow">
+        @if($place->image)
+            <img src="{{ url("/images/tourism/$place->image") }}" class="card-img-top" alt="{{ $place->name }}" style="height:350px; object-fit:cover;">
+        @endif
+        <div class="card-body">
+            <h2>{{ $place->name }}</h2>
+            <p><strong>ที่ตั้ง:</strong> {{ $place->location }}</p>
+            <p>{{ $place->description }}</p>
+            <a href="{{ route('tourism.index') }}" class="btn btn-secondary">⬅ กลับไปหน้ารวม</a>
+        </div>
+    </div>
+</div>
+@endsection

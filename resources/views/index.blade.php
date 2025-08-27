@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <title>ท่องเที่ยวปทุมธานี</title>
+    <title>ท่องเที่ยวประเทศไทย</title>
     <style>
         body { font-family: Tahoma, sans-serif; margin: 20px; }
         .section { margin-bottom: 40px; }
@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h1>แหล่งท่องเที่ยวจังหวัดปทุมธานี</h1>
+    <h1>แหล่งท่องเที่ยวประเทศไทย</h1>
 
     <div class="section">
         <h2>🏞️ สถานที่ท่องเที่ยว</h2>
@@ -20,7 +20,7 @@
                 <h3>{{ $place->name }}</h3>
                 <p>{{ $place->description }}</p>
                 @if($place->image)
-                    <img src="{{ asset('storage/'.$place->image) }}" alt="{{ $place->name }}">
+                    <img src="{{ url("/images/tourism/$place->image") }}" alt="{{ $place->name }}">
                 @endif
             </div>
         @empty

@@ -1,12 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ $newsItem->title }}</title>
-</head>
-<body>
-    <h1>{{ $newsItem->title }}</h1>
-    <p>{{ $newsItem->content }}</p>
-    <small>Published: {{ $newsItem->created_at->format('d M Y') }}</small>
-</body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+<div style="max-width:800px; margin:0 auto; padding:20px;">
+    {{-- ชื่อข่าว --}}
+    <h2 style="text-align:center; margin-bottom:20px;">{{ $item->title }}</h2>
+
+    {{-- รูปใหญ่ --}}
+    <div style="text-align:center; margin-bottom:20px;">
+        @if($item->image)
+            <img src="{{ url("/images/news/$item->image") }}"alt="{{ $item->title }}" style="width:100%; max-height:500px; object-fit:cover; border-radius:12px;">
+        @else
+            <img src="{{ url("/images/news/$item->image") }}" style="width:100%; max-height:500px; object-fit:cover; border-radius:12px;">
+        @endif
+    </div>
+
+    {{-- เนื้อหา --}}
+    <div style="font-size:16px; color:#333; margin-bottom:20px;">
+        <p>{{ $item->content }}</p>
+    </div>
+
+    {{-- ปุ่มย้อนกลับ --}}
+    <div style="text-align:center; margin-top:20px;">
+        <a href="{{ route('news.index') }}">
+            <button style="padding:10px 20px; background:#ffc107; color:black; border:none; border-radius:8px;">
+                🔙 กลับหน้ารายการข่าว
+            </button>
+        </a>
+    </div>
+</div>
+@endsection
+

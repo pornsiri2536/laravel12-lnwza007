@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,23 +12,103 @@ class TourismNewsSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('tourism_news')->insert([
+        $newsData = [
             [
                 "title" => "เทศกาลกินกุ้งแม่น้ำปทุมธานี 2025",
                 "content" => "จังหวัดปทุมธานีจัดงานเทศกาลกินกุ้งแม่น้ำสุดยิ่งใหญ่ รวบรวมร้านอาหารชื่อดังและเมนูเด็ดมากมาย พร้อมกิจกรรมดนตรีสดและการแสดงพื้นบ้าน เพื่อส่งเสริมการท่องเที่ยวริมแม่น้ำเจ้าพระยา",
-                "image" => "https://picsum.photos/500?random=1",
+                "image" => "https://picsum.photos/id/101/600/400",
                 "published_at" => "2025-01-15",
-                "created_at" => now(),
-                "updated_at" => now(),
             ],
             [
                 "title" => "งานแห่เทียนเข้าพรรษาวัดสิงห์",
                 "content" => "ชาวบ้านและนักท่องเที่ยวร่วมสืบสานประเพณีแห่เทียนเข้าพรรษา ณ วัดสิงห์ จังหวัดปทุมธานี ภายในงานมีการตกแต่งขบวนเทียนอย่างสวยงาม พร้อมกิจกรรมทางวัฒนธรรมและการละเล่นพื้นบ้าน",
-                "image" => "https://picsum.photos/500?random=2",
+                "image" => "https://picsum.photos/id/102/600/400",
                 "published_at" => "2025-07-20",
-                "created_at" => now(),
-                "updated_at" => now(),
             ],
-        ]);
+            [
+                "title" => "ประเพณีแข่งเรือยาวจังหวัดน่าน",
+                "content" => "เทศกาลแข่งเรือยาวเป็นงานสำคัญสำหรับชุมชนท้องถิ่น โดยนำผู้คนมารวมตัวกันเพื่อเฉลิมฉลองวัฒนธรรมและประเพณีของตน",
+                "image" => "https://image.makewebeasy.net/makeweb/m_1920x0/eukao6Dro/gallery/DSCF8013.jpg?v=202012190947",
+                "event_period" => [
+                    "start" => "2025-08-29",
+                    "end"   => "2025-09-07"
+                ]
+            ],
+            [
+                "title" => "เทศกาลโคมไฟเชียงราย 2025",
+                "content" => "เทศกาลโคมไฟเชียงรายประดับโคมไฟนับพันดวงทั่วเมือง สร้างบรรยากาศสวยงามและโรแมนติก พร้อมกิจกรรมการแสดงศิลปวัฒนธรรมพื้นบ้านและดนตรีสด",
+                "image" => "https://picsum.photos/id/103/600/400",
+                "event_period" => [
+                    "start" => "2025-11-01",
+                    "end"   => "2025-11-10"
+                ]
+            ],
+            [
+                "title" => "งานประเพณีตักบาตรดอกไม้สระบุรี",
+                "content" => "ร่วมสืบสานวัฒนธรรมไทยในงานประเพณีตักบาตรดอกไม้จังหวัดสระบุรี มีพระสงฆ์จำนวนมากเดินบิณฑบาต และนักท่องเที่ยวสามารถร่วมถวายดอกไม้เพื่อความเป็นสิริมงคล",
+                "image" => "https://picsum.photos/id/104/600/400",
+                "published_at" => "2025-07-13",
+            ],
+            [
+                "title" => "เทศกาลชิมทุเรียนระยอง",
+                "content" => "เทศกาลชิมทุเรียนและผลไม้เมืองระยอง 2025 มอบประสบการณ์อร่อยกับผลไม้สดจากสวน พร้อมร้านค้าและกิจกรรมบันเทิงสำหรับนักท่องเที่ยว",
+                "image" => "https://picsum.photos/id/105/600/400",
+                "event_period" => [
+                    "start" => "2025-05-10",
+                    "end"   => "2025-05-20"
+                ]
+            ],
+            [
+                "title" => "เทศกาลชมดอกบัวหลวงนครปฐม",
+                "content" => "เทศกาลชมดอกบัวหลวงนครปฐมจัดขึ้นทุกปีเพื่อดึงดูดนักท่องเที่ยวมาชมความสวยงามของดอกบัว พร้อมกิจกรรมเวิร์คช็อปจัดดอกไม้และชิมอาหารพื้นบ้าน",
+                "image" => "https://picsum.photos/id/106/600/400",
+                "published_at" => "2025-02-18",
+            ],
+            [
+                "title" => "เทศกาลหมู่บ้านช้างสุรินทร์",
+                "content" => "งานหมู่บ้านช้างสุรินทร์จัดการแสดงช้างแสนรู้ กิจกรรมช้างแห่รอบเมือง และการแสดงวัฒนธรรมพื้นบ้านที่เป็นเอกลักษณ์",
+                "image" => "https://picsum.photos/id/107/600/400",
+                "event_period" => [
+                    "start" => "2025-11-15",
+                    "end"   => "2025-11-20"
+                ]
+            ],
+            [
+                "title" => "เทศกาลอาหารทะเลสมุทรสาคร",
+                "content" => "เทศกาลอาหารทะเลจังหวัดสมุทรสาครรวมร้านอาหารทะเลชื่อดังหลายแห่งในพื้นที่ พร้อมเมนูเด็ดสดใหม่และการแสดงดนตรีตลอดงาน",
+                "image" => "https://picsum.photos/id/108/600/400",
+                "published_at" => "2025-03-05",
+            ],
+            [
+                "title" => "เทศกาลปีใหม่กรุงเทพมหานคร 2025",
+                "content" => "กรุงเทพมหานครจัดเทศกาลปีใหม่สุดยิ่งใหญ่ พร้อมพลุสุดอลังการ คอนเสิร์ตจากศิลปินชื่อดัง และกิจกรรมส่งท้ายปีเก่าต้อนรับปีใหม่",
+                "image" => "https://picsum.photos/id/109/600/400",
+                "event_period" => [
+                    "start" => "2025-12-31",
+                    "end"   => "2026-01-01"
+                ]
+            ],
+        ];
+
+        foreach ($newsData as $news) {
+            $id = DB::table('tourism_news')->insertGetId([
+                'title'        => $news['title'],
+                'content'      => $news['content'],
+                'image'        => $news['image'],
+                'published_at' => $news['published_at'] ?? null,
+                'created_at'   => now(),
+                'updated_at'   => now(),
+            ]);
+
+            if (isset($news['event_period'])) {
+                DB::table('event_dates')->insert([
+                    'tourism_news_id' => $id,
+                    'start_date'      => $news['event_period']['start'],
+                    'end_date'        => $news['event_period']['end'],
+                    'created_at'      => now(),
+                    'updated_at'      => now(),
+                ]);
+            }
+        }
     }
 }

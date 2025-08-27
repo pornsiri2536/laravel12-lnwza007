@@ -1,26 +1,32 @@
 <?php
 
 use App\Http\Controllers\TourismController;
+use App\Http\Controllers\NewsController;
 use App\Models\Product;
+use App\Models\News;
+use App\Models\TourismPlace;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 // -----------------------
-// หน้าแรก Inertia
+// Dashboard & Auth
 // -----------------------
-Route::get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
-
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', fn() => Inertia::render('dashboard'))->name('dashboard');
 });
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+
+// -----------------------
+// หน้าแรก (ดึงข้อมูลจาก Model)
+// -----------------------
+Route::get('/', function () {
+    $news = News::latest()->take(10)->get();            // ข่าวล่าสุด 10 ข่าว
+    $places = TourismPlace::latest()->take(10)->get();  // สถานที่ล่าสุด 10 แห่ง
+    return view('home', compact('news', 'places'));
+})->name('home');
 
 // -----------------------
 // Route เบื้องต้น
@@ -46,11 +52,9 @@ Route::prefix('gallery')->group(function () {
     Route::get('/ant', fn() => view("test/ant", [
         'ant' => "https://cdn3.movieweb.com/i/article/Oi0Q2edcVVhs4p1UivwyyseezFkHsq/1107:50/Ant-Man-3-Talks-Michael-Douglas-Update.jpg"
     ]));
-
     Route::get('/bird', fn() => view("test/bird", [
         'bird' => "https://images.indianexpress.com/2021/03/falcon-anthony-mackie-1200.jpg"
     ]));
-
     Route::get('/cat', fn() => view("test/cat", [
         'cat' => "http://www.onyxtruth.com/wp-content/uploads/2017/06/black-panther-movie-onyx-truth.jpg"
     ]));
@@ -75,7 +79,6 @@ Route::prefix('active')->group(function () {
     Route::view('/blog', 'active.blog')->name('blog');
     Route::view('/contact', 'active.contact')->name('contact');
 
-    // ✅ Route แสดงข้อมูลครูจาก JSON
     Route::get('/teacher', function () {
         $teachers = json_decode(file_get_contents(
             'https://raw.githubusercontent.com/arc6828/laravel8/main/public/json/teachers.json'
@@ -83,51 +86,37 @@ Route::prefix('active')->group(function () {
         return view("active.teacher", compact("teachers"));
     })->name('active.teacher');
 });
-Route::get('query/sql', function () {
-    $products = DB::select("SELECT * FROM products");
-    // $products = DB::select("SELECT * FROM products WHERE price > 100");
-    return view('query-test', compact('products'));
-});
 
-Route::get('query/builder', function () {
-    $products = DB::table('products')->get();
-    // $products = DB::table('products')->where('price', '>', 100)->get();
-    return view('query-test', compact('products'));
-});
-
-Route::get('query/orm', function () {
-    $products = Product::get();
-    // $products = Product::where('price', '>', 100)->get();
-    return view('query-test', compact('products'));
-});
-
-Route::get('product/form', function () {
-    //
-})->name("product.form");
+// -----------------------
+// Query Routes
+// -----------------------
+Route::get('query/sql', fn() => view('query-test', [
+    'products' => DB::select("SELECT * FROM products")
+]));
+Route::get('query/builder', fn() => view('query-test', [
+    'products' => DB::table('products')->get()
+]));
+Route::get('query/orm', fn() => view('query-test', [
+    'products' => Product::get()
+]));
+Route::get('product/form', fn() => '')->name("product.form");
 
 // -----------------------
 // Test Route
 // -----------------------
 Route::view('/test', 'test')->name('test');
-Route::get('barchart', function () {    
-    return view('barchart');
-})->name('barchart');
+Route::get('barchart', fn() => view('barchart'))->name('barchart');
 
 // -----------------------
-// Tourism Routes (Pathumthani)
+// Tourism Routes
 // -----------------------
 Route::get('/tourism', [TourismController::class, 'index'])->name('tourism.index');
-Route::get('/tourism/show/{id}', [TourismController::class, 'show'])->name('tourism.show');
-use App\Http\Controllers\NewsController;
+Route::get('/tourism/{id}', [TourismController::class, 'show'])->name('tourism.show');
+Route::resource('tourism', TourismController::class)->except(['index', 'show']);
+
+// -----------------------
+// News Routes
+// -----------------------
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
-
-
-
-
-
-
-
-
-
-
-
+Route::resource('news', NewsController::class)->except(['index', 'show']);
