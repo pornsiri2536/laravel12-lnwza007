@@ -41,7 +41,8 @@
 
                     <!-- เมนู เกี่ยวกับเรา -->
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="#">ℹ️ เกี่ยวกับเรา</a>
+                        <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" href="{{ route('about') }}">ℹ️ เกี่ยวกับเรา</a>
+
                     </li>
                 </ul>
             </div>

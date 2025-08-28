@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TourismController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PageController; // เพิ่มถ้าใช้ PageController
 use App\Models\Product;
 use App\Models\News;
 use App\Models\TourismPlace;
@@ -120,3 +121,8 @@ Route::resource('tourism', TourismController::class)->except(['index', 'show']);
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 Route::resource('news', NewsController::class)->except(['index', 'show']);
+
+// -----------------------
+// About Page Route
+// -----------------------
+Route::get('/about', [PageController::class, 'about'])->name('about');
