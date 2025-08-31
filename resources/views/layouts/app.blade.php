@@ -9,6 +9,26 @@
             width: 100%;
             height: 200px;
             border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
         }
     </style>
 </head>
@@ -34,9 +54,14 @@
                         <a class="nav-link {{ request()->is('news*') ? 'active' : '' }}" href="{{ route('news.index') }}">📰 ข่าว</a>
                     </li>
 
+                    <!-- เมนู ข่าวการท่องเที่ยว -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->is('tourism-news*') ? 'active' : '' }}" href="{{ route('tourism-news.index') }}">🌴 ข่าวการท่องเที่ยว</a>
+                    </li>
+
                     <!-- เมนู สถานที่ท่องเที่ยว -->
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('tourism*') ? 'active' : '' }}" href="{{ route('tourism.index') }}">🏞️ สถานที่ท่องเที่ยว</a>
+                        <a class="nav-link {{ request()->is('tourism*') && !request()->is('tourism-news*') ? 'active' : '' }}" href="{{ route('tourism.index') }}">🏞️ สถานที่ท่องเที่ยว</a>
                     </li>
 
                     <!-- เมนู เกี่ยวกับเรา -->

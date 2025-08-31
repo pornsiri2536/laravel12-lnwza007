@@ -10,9 +10,13 @@ return new class extends Migration
     {
         Schema::create('event_dates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tourism_news_id')->constrained()->onDelete('cascade');
+            $table->foreignId('news_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('tourism_news_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('event_name');
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('location')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

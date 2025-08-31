@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\TourismController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\TourismNewsController;
 use App\Http\Controllers\PageController; // เพิ่มถ้าใช้ PageController
-use App\Models\Product;
 use App\Models\News;
 use App\Models\TourismPlace;
+use App\Models\TourismNews;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,9 +25,10 @@ require __DIR__.'/auth.php';
 // หน้าแรก (ดึงข้อมูลจาก Model)
 // -----------------------
 Route::get('/', function () {
-    $news = News::latest()->take(10)->get();            // ข่าวล่าสุด 10 ข่าว
-    $places = TourismPlace::latest()->take(10)->get();  // สถานที่ล่าสุด 10 แห่ง
-    return view('home', compact('news', 'places'));
+    $news = News::latest()->take(5)->get();                    // ข่าวล่าสุด 5 ข่าว
+    $tourismNews = TourismNews::with('eventDates')->latest()->take(5)->get();  // ข่าวการท่องเที่ยวล่าสุด 5 ข่าว
+    $places = TourismPlace::latest()->take(5)->get();          // สถานที่ล่าสุด 5 แห่ง
+    return view('home', compact('news', 'tourismNews', 'places'));
 })->name('home');
 
 // -----------------------
@@ -98,7 +100,7 @@ Route::get('query/builder', fn() => view('query-test', [
     'products' => DB::table('products')->get()
 ]));
 Route::get('query/orm', fn() => view('query-test', [
-    'products' => Product::get()
+    'products' => []
 ]));
 Route::get('product/form', fn() => '')->name("product.form");
 
@@ -121,6 +123,12 @@ Route::resource('tourism', TourismController::class)->except(['index', 'show']);
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 Route::resource('news', NewsController::class)->except(['index', 'show']);
+
+// -----------------------
+// Tourism News Routes
+// -----------------------
+Route::get('/tourism-news', [TourismNewsController::class, 'index'])->name('tourism-news.index');
+Route::get('/tourism-news/{id}', [TourismNewsController::class, 'show'])->name('tourism-news.show');
 
 // -----------------------
 // About Page Route

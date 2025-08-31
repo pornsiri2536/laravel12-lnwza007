@@ -9,9 +9,13 @@
         @foreach($news as $item)
             <div class="card shadow h-100">
                 <div class="card-body">
-                    <img src="{{ url("/images/news/$item->image") }}" alt="{{ $item->title }}" class="card-img-top">
+                    @if($item->image)
+                        <img src="{{ $item->image }}" alt="{{ $item->title }}" class="card-img-top">
+                    @else
+                        <img src="https://picsum.photos/300/200?random={{ $item->id }}" alt="{{ $item->title }}" class="card-img-top">
+                    @endif
                     <h5 class="card-title">{{ $item->title }}</h5>
-                    <p class="card-text text-muted">{{ Str::limit($item->content, 80) }}</p>
+                    <p class="card-text text-muted">{{ Str::limit($item->description, 80) }}</p>
                     <a href="{{ route('news.show', $item->id) }}" class="btn btn-primary btn-sm">อ่านต่อ</a>
                 </div>
             </div>
@@ -21,13 +25,44 @@
         <a href="{{ route('news.index') }}" class="btn btn-outline-secondary">ดูข่าวทั้งหมด</a>
     </div>
 
+    <!-- ข่าวการท่องเที่ยว -->
+    <h2 class="mb-3">🌴 ข่าวการท่องเที่ยวล่าสุด</h2>
+    <div class="grid-container mb-4">
+        @foreach($tourismNews as $item)
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    @if($item->image)
+                        <img src="{{ $item->image }}" alt="{{ $item->title }}" class="card-img-top">
+                    @else
+                        <img src="https://picsum.photos/300/200?random={{ $item->id }}" alt="{{ $item->title }}" class="card-img-top">
+                    @endif
+                    <h5 class="card-title">{{ $item->title }}</h5>
+                    <p class="card-text text-muted">{{ Str::limit($item->description, 80) }}</p>
+                    
+                    @if($item->eventDates->count() > 0)
+                        <small class="text-muted d-block mb-2">
+                            📅 {{ \Carbon\Carbon::parse($item->eventDates->first()->start_date)->format('d/m/Y') }}
+                        </small>
+                    @endif
+                    
+                    <a href="{{ route('tourism-news.show', $item->id) }}" class="btn btn-success btn-sm">อ่านต่อ</a>
+                </div>
+            </div>
+        @endforeach
+    </div>
+    <div class="text-end mb-5">
+        <a href="{{ route('tourism-news.index') }}" class="btn btn-outline-secondary">ดูข่าวการท่องเที่ยวทั้งหมด</a>
+    </div>
+
     <!-- สถานที่ท่องเที่ยว -->
     <h2 class="mb-3">🏞️ สถานที่ท่องเที่ยวแนะนำ</h2>
     <div class="grid-container mb-4">
         @foreach($places as $place)
             <div class="card shadow h-100">
                 @if($place->image)
-                    <img src="{{ url("/images/tourism/$place->image") }}" alt="{{ $place->name }}" class="card-img-top">
+                    <img src="{{ $place->image }}" alt="{{ $place->name }}" class="card-img-top">
+                @else
+                    <img src="https://picsum.photos/300/200?random={{ $place->id }}" alt="{{ $place->name }}" class="card-img-top">
                 @endif
                 <div class="card-body">
                     <h5 class="card-title">{{ $place->name }}</h5>
@@ -45,15 +80,25 @@
     <style>
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 คอลัมน์ */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
         .card {
             height: 100%;
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
         }
         .card img {
-            height: 150px;
+            height: 200px;
             object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
         }
     </style>
 @endsection

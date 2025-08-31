@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
 
         // เรียก Seeder อื่น ๆ
         $this->call([
-            TourismSeeder::class,
             NewsSeeder::class,
             TourismNewsSeeder::class,
             TourismPlaceSeeder::class,

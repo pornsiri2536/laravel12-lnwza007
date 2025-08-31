@@ -11,6 +11,14 @@ class News extends Model
 
     protected $fillable = [
         'title',
-        'content',
+        'description',
+        'image',
+        'link',
     ];
+
+    // ความสัมพันธ์กับตาราง event_dates
+    public function eventDates()
+    {
+        return $this->hasMany(EventDate::class, 'news_id');
+    }
 }

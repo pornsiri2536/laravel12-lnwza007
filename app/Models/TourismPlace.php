@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class TourismPlace extends Model
 {
-    //use HasFactory;
+    use HasFactory;
 
-    // ระบุฟิลด์ที่สามารถ Mass Assignment ได้
-    //protected $fillable = ['id','name', 'description', 'location', 'image'];
+    protected $fillable = [
+        'name',
+        'description', 
+        'image',
+    ];
 }

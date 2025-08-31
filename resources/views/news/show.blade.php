@@ -8,16 +8,25 @@
     {{-- รูปใหญ่ --}}
     <div style="text-align:center; margin-bottom:20px;">
         @if($item->image)
-            <img src="{{ url("/images/news/$item->image") }}"alt="{{ $item->title }}" style="width:100%; max-height:500px; object-fit:cover; border-radius:12px;">
+            <img src="{{ $item->image }}" alt="{{ $item->title }}" style="width:100%; max-height:500px; object-fit:cover; border-radius:12px;">
         @else
-            <img src="{{ url("/images/news/$item->image") }}" style="width:100%; max-height:500px; object-fit:cover; border-radius:12px;">
+            <img src="https://picsum.photos/800/400?random={{ $item->id }}" alt="{{ $item->title }}" style="width:100%; max-height:500px; object-fit:cover; border-radius:12px;">
         @endif
     </div>
 
     {{-- เนื้อหา --}}
     <div style="font-size:16px; color:#333; margin-bottom:20px;">
-        <p>{{ $item->content }}</p>
+        <p>{{ $item->description }}</p>
     </div>
+
+    {{-- ลิงก์เพิ่มเติม --}}
+    @if($item->link)
+        <div style="text-align:center; margin-bottom:20px;">
+            <a href="{{ $item->link }}" target="_blank" class="btn btn-info">
+                🔗 อ่านเพิ่มเติม
+            </a>
+        </div>
+    @endif
 
     {{-- ปุ่มย้อนกลับ --}}
     <div style="text-align:center; margin-top:20px;">

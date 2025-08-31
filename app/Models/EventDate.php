@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventDate extends Model
 {
-    protected $table = 'event_dates'; // ชื่อตาราง
+    protected $table = 'event_dates';
 
     protected $fillable = [
+        'news_id',
         'tourism_news_id',
         'event_name',
         'start_date',
@@ -16,6 +17,12 @@ class EventDate extends Model
         'location',
         'description'
     ];
+
+    // ความสัมพันธ์กับ News
+    public function news()
+    {
+        return $this->belongsTo(News::class, 'news_id');
+    }
 
     // ความสัมพันธ์กับ TourismNews
     public function tourismNews()
