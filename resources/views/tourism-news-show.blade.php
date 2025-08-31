@@ -44,14 +44,6 @@
                 </div>
             </div>
             
-            @if($news->link)
-                <div class="text-center mb-4">
-                    <a href="{{ $news->link }}" target="_blank" class="btn btn-info btn-lg">
-                        🔗 อ่านเพิ่มเติม
-                    </a>
-                </div>
-            @endif
-            
             <div class="text-center">
                 <a href="{{ route('tourism-news.index') }}" class="btn btn-secondary">
                     🔙 กลับไปหน้ารายการข่าวการท่องเที่ยว

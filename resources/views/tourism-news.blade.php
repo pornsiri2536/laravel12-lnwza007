@@ -32,11 +32,6 @@
                     @endif
                     
                     <div class="mt-auto">
-                        @if($news->link)
-                            <a href="{{ $news->link }}" target="_blank" class="btn btn-info btn-sm me-2">
-                                🔗 อ่านเพิ่มเติม
-                            </a>
-                        @endif
                         <a href="{{ route('tourism-news.show', $news->id) }}" class="btn btn-primary btn-sm">
                             🔍 อ่านต่อ
                         </a>

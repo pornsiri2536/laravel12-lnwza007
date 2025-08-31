@@ -19,15 +19,6 @@
         <p>{{ $item->description }}</p>
     </div>
 
-    {{-- ลิงก์เพิ่มเติม --}}
-    @if($item->link)
-        <div style="text-align:center; margin-bottom:20px;">
-            <a href="{{ $item->link }}" target="_blank" class="btn btn-info">
-                🔗 อ่านเพิ่มเติม
-            </a>
-        </div>
-    @endif
-
     {{-- ปุ่มย้อนกลับ --}}
     <div style="text-align:center; margin-top:20px;">
         <a href="{{ route('news.index') }}">
