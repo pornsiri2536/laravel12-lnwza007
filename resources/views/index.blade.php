@@ -36,7 +36,7 @@
                 <p>{{ $item->content }}</p>
                 <small>เผยแพร่: {{ \Carbon\Carbon::parse($item->published_at)->format('d/m/Y') }}</small>
                 @if($item->image)
-                    <img src="{{ asset('storage/'.$item->image) }}" alt="{{ $item->title }}">
+                    <img src="{!! asset('storage/'.$item->image) !!}" alt="{{ $item->title }}">
                 @endif
             </div>
         @empty

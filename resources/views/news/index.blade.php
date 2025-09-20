@@ -13,7 +13,7 @@
             @endif
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ $item->title }}</h5>
-                <p class="card-text flex-grow-1">{{ Str::limit($item->description, 100) }}</p>
+                <p class="card-text flex-grow-1">{!! Str::limit($item->description, 100) !!}</p>
                 <div class="text-center mt-auto">
                     <a href="{{ route('news.show', $item->id) }}" class="btn btn-primary">
                         🔍 อ่านต่อ
