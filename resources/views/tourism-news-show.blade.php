@@ -44,8 +44,15 @@
                 </div>
             </div>
             
-            <div class="text-center">
-                <a href="{{ route('tourism-news.index') }}" class="btn btn-secondary">
+            <div class="text-center mt-4">
+                <p>ขอบคุณข้อมูล : <span>credit</span>
+                    @if($news->link)
+                        <a href="{{ $news->link }}" target="_blank" class="btn btn-info" style="margin-left:10px;">
+                            ไปยังเว็บไซต์ต้นทาง
+                        </a>
+                    @endif
+                </p>
+                <a href="{{ route('tourism-news.index') }}" class="btn btn-secondary mt-2">
                     🔙 กลับไปหน้ารายการข่าวการท่องเที่ยว
                 </a>
             </div>

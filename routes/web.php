@@ -7,8 +7,10 @@ use App\Http\Controllers\PageController; // เพิ่มถ้าใช้ Pa
 use App\Models\News;
 use App\Models\TourismPlace;
 use App\Models\TourismNews;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 // -----------------------
@@ -134,3 +136,60 @@ Route::get('/tourism-news/{id}', [TourismNewsController::class, 'show'])->name('
 // About Page Route
 // -----------------------
 Route::get('/about', [PageController::class, 'about'])->name('about');
+// -----------------------
+// Product Routes (CRUD)
+// -----------------------
+Route::get('product-index', function () {
+    $products = App\Models\Product::get();
+    return view('query-test', compact('products'));
+})->name("product.index");
+
+Route::get('product-form', function () {
+    return view('product-form');
+})->name("product.form");
+
+Route::post('product-submit', function (Request $request) {
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|numeric|min:0',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('uploads', 'public');
+        $url = Storage::url($imagePath);
+        $data["image"] = $url;
+    }
+    App\Models\Product::create($data);
+    return redirect()->route('product.index')->with('success', 'เพิ่มสินค้าแล้ว!');
+})->name('product.submit');
+
+// แก้ไขข้อมูลสินค้า
+Route::get('product-edit/{id}', function ($id) {
+    $product = App\Models\Product::findOrFail($id);
+    return view('product-form', compact('product'));
+})->name('product.edit');
+
+Route::post('product-update/{id}', function (Request $request, $id) {
+    $product = App\Models\Product::findOrFail($id);
+    $data = $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'price' => 'required|numeric|min:0',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('uploads', 'public');
+        $url = Storage::url($imagePath);
+        $data["image"] = $url;
+    }
+    $product->update($data);
+    return redirect()->route('product.index')->with('success', 'แก้ไขข้อมูลสินค้าแล้ว!');
+})->name('product.update');
+
+// ลบข้อมูลสินค้า
+Route::post('product-delete/{id}', function ($id) {
+    $product = App\Models\Product::findOrFail($id);
+    $product->delete();
+    return redirect()->route('product.index')->with('success', 'ลบข้อมูลสินค้าแล้ว!');
+})->name('product.delete');

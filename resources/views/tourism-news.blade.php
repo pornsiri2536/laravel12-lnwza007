@@ -40,6 +40,14 @@
             </div>
         @endforeach
     </div>
+
+    <div class="mt-4 text-center">
+        <p>ขอบคุณข้อมูล : <span>credit</span>
+            <a href="https://thailandtravel.app/content/read/3947" target="_blank" class="btn btn-info" style="margin-left:10px;">
+                ไปยังเว็บไซต์ต้นทาง
+            </a>
+        </p>
+    </div>
 </div>
 
 <style>

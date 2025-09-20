@@ -29,3 +29,6 @@ return new class extends Migration
         Schema::dropIfExists('tourism_news');
     }
 };
+
+// ตาราง tourism_news รองรับ CRUD แล้ว
+// สามารถเพิ่ม, แก้ไข, ลบข้อมูลได้ผ่าน Model และ Route ที่สร้างไว้
