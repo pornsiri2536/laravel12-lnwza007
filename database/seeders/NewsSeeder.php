@@ -10,36 +10,28 @@ class NewsSeeder extends Seeder
 {
     public function run(): void
     {
-        // Array of available news images
+        // Ensure clean slate so the newest items are the ones with valid images
+        DB::table('news')->truncate();
+
+        // Use existing images under public/assets/img/tourism (these files exist)
         $newsImages = [
-            '11.jpg',
-            '04.jpg',
-            '61.jpg',
-            '06.jpg',
-            '110-1.jpg',
-            '5555.jpg',
-            '4444.jpg',
-            '3333.jpg',
-            '2222.jpg',
-            'aaaa.jpg',
-            'NU.jpg',
-            'NU.png',
-            'RM.jpg',
-            'IY.jpg',
-            'IU.jpg',
-            'YU.jpg',
-            'AU.jpg',
-            'OO.jpg',
-            'VJ.jpg',
-            'Vijit.jpg',
-            'TU.jpg'
+            '1.jpeg',
+            'phi-phi-island.jpg',
+            'KhaoSok.jpg',
+            'thungprongthong.jpeg',
+            'พิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ.jpg',
+            'ตลาดริมน้ำวัดศาลเจ้า.jpeg',
+            'สกายวอล์คสองแคว.webp',
+            'สวนสนุกดรีมเวิลด์.webp',
+            'ตลาดน้ำคลองสระบัว.jpg',
+            'kL.jpg',
         ];
 
         DB::table('news')->insert([
             [
                 "title" => "เทศกาลกินกุ้งแม่น้ำ",
                 "description" => "จังหวัดปทุมธานีจัดเทศกาลกินกุ้งแม่น้ำสดใหม่จากแม่น้ำเจ้าพระยา",
-                "image" => "/assets/img/news/" . $newsImages[0],
+                "image" => "/assets/img/tourism/" . $newsImages[0],
                 "link" => "https://example.com/news/1",
                 "created_at" => Carbon::now()->subDays(10),
                 "updated_at" => Carbon::now()->subDays(10),
@@ -47,7 +39,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "งานนมัสการหลวงพ่อโต",
                 "description" => "ชาวบ้านและนักท่องเที่ยวร่วมงานนมัสการหลวงพ่อโต วัดโบสถ์",
-                "image" => "/assets/img/news/" . $newsImages[1],
+                "image" => "/assets/img/tourism/" . $newsImages[1],
                 "link" => "https://example.com/news/2",
                 "created_at" => Carbon::now()->subDays(9),
                 "updated_at" => Carbon::now()->subDays(9),
@@ -55,7 +47,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "ประเพณีแข่งเรือยาว",
                 "description" => "การแข่งขันเรือยาวประเพณีริมแม่น้ำเจ้าพระยา สนุกสนานและคึกคัก",
-                "image" => "/assets/img/news/" . $newsImages[2],
+                "image" => "/assets/img/tourism/" . $newsImages[2],
                 "link" => "https://example.com/news/3",
                 "created_at" => Carbon::now()->subDays(8),
                 "updated_at" => Carbon::now()->subDays(8),
@@ -63,7 +55,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "ชมทุ่งดอกไม้เมืองปทุม",
                 "description" => "นักท่องเที่ยวเดินชมทุ่งดอกไม้สีสันสดใสริมแม่น้ำ",
-                "image" => "/assets/img/news/" . $newsImages[3],
+                "image" => "/assets/img/tourism/" . $newsImages[3],
                 "link" => "https://example.com/news/4",
                 "created_at" => Carbon::now()->subDays(7),
                 "updated_at" => Carbon::now()->subDays(7),
@@ -71,7 +63,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "ตลาดน้ำคลองหลวง",
                 "description" => "สัมผัสวิถีชีวิตริมน้ำ ซื้อของสดและอาหารพื้นบ้าน",
-                "image" => "/assets/img/news/" . $newsImages[4],
+                "image" => "/assets/img/tourism/" . $newsImages[4],
                 "link" => "https://example.com/news/5",
                 "created_at" => Carbon::now()->subDays(6),
                 "updated_at" => Carbon::now()->subDays(6),
@@ -79,7 +71,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "งานประดับไฟยามค่ำคืน",
                 "description" => "งานประดับไฟสุดอลังการในเทศกาลท้องถิ่น",
-                "image" => "/assets/img/news/" . $newsImages[5],
+                "image" => "/assets/img/tourism/" . $newsImages[5],
                 "link" => "https://example.com/news/6",
                 "created_at" => Carbon::now()->subDays(5),
                 "updated_at" => Carbon::now()->subDays(5),
@@ -87,7 +79,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "เทศกาลอาหารพื้นเมือง",
                 "description" => "รวมอาหารพื้นบ้านอร่อยๆ ให้ชิมฟรีและขาย",
-                "image" => "/assets/img/news/" . $newsImages[6],
+                "image" => "/assets/img/tourism/" . $newsImages[6],
                 "link" => "https://example.com/news/7",
                 "created_at" => Carbon::now()->subDays(4),
                 "updated_at" => Carbon::now()->subDays(4),
@@ -95,7 +87,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "งานแข่งขันจักรยานทางไกล",
                 "description" => "นักปั่นจากหลายจังหวัดเข้าร่วมแข่งขันเส้นทางสวยงาม",
-                "image" => "/assets/img/news/" . $newsImages[7],
+                "image" => "/assets/img/tourism/" . $newsImages[7],
                 "link" => "https://example.com/news/8",
                 "created_at" => Carbon::now()->subDays(3),
                 "updated_at" => Carbon::now()->subDays(3),
@@ -103,7 +95,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "งานแสดงศิลปวัฒนธรรม",
                 "description" => "ศิลปินและนักแสดงท้องถิ่นโชว์วัฒนธรรมประจำจังหวัด",
-                "image" => "/assets/img/news/" . $newsImages[8],
+                "image" => "/assets/img/tourism/" . $newsImages[8],
                 "link" => "https://example.com/news/9",
                 "created_at" => Carbon::now()->subDays(2),
                 "updated_at" => Carbon::now()->subDays(2),
@@ -111,7 +103,7 @@ class NewsSeeder extends Seeder
             [
                 "title" => "งานแข่งขันว่ายน้ำแม่น้ำเจ้าพระยา",
                 "description" => "การแข่งขันว่ายน้ำในแม่น้ำเจ้าพระยา สนุกและตื่นเต้น",
-                "image" => "/assets/img/news/" . $newsImages[9],
+                "image" => "/assets/img/tourism/" . $newsImages[9],
                 "link" => "https://example.com/news/10",
                 "created_at" => Carbon::now()->subDay(),
                 "updated_at" => Carbon::now()->subDay(),
@@ -119,4 +111,3 @@ class NewsSeeder extends Seeder
         ]);
     }
 }
-

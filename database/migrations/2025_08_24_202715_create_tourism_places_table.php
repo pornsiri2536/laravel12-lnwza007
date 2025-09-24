@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');            // ชื่อสถานที่
             $table->string('image')->nullable(); // รูปภาพ
+            $table->string('link')->nullable(); // ลิงก์แหล่งข้อมูล
             $table->text('description')->nullable(); // รายละเอียด
             $table->timestamps();
         });

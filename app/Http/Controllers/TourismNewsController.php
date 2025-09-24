@@ -9,7 +9,7 @@ class TourismNewsController extends Controller
 {
     public function index()
     {
-        $tourismNews = TourismNews::with('eventDates')->latest()->get();
+        $tourismNews = TourismNews::with('eventDates')->latest()->paginate(10);
         return view('tourism-news', compact('tourismNews'));
     }
 
