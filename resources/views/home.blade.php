@@ -62,8 +62,11 @@
             </div>
         @endforeach
     </div>
+    @php
+        $newsUrl = \Illuminate\Support\Facades\Route::has('news.index') ? route('news.index') : url('/news');
+    @endphp
     <div class="text-end mb-5">
-        <a href="{{ route('news.index') }}" class="btn btn-outline-secondary">ดูข่าวทั้งหมด</a>
+        <a href="{{ $newsUrl }}" class="btn btn-outline-secondary">ดูข่าวทั้งหมด</a>
     </div>
 
     <!-- ข่าวการท่องเที่ยว -->
@@ -110,8 +113,11 @@
             </div>
         @endforeach
     </div>
+    @php
+        $tNewsUrl = \Illuminate\Support\Facades\Route::has('tourism-news.index') ? route('tourism-news.index') : url('/tourism-news');
+    @endphp
     <div class="text-end mb-5">
-        <a href="{{ route('tourism-news.index') }}" class="btn btn-outline-secondary">ดูข่าวการท่องเที่ยวทั้งหมด</a>
+        <a href="{{ $tNewsUrl }}" class="btn btn-outline-secondary">ดูข่าวการท่องเที่ยวทั้งหมด</a>
     </div>
 
     <!-- สถานที่ท่องเที่ยว -->
@@ -149,8 +155,11 @@
             </div>
         @endforeach
     </div>
+    @php
+        $tourismUrl = \Illuminate\Support\Facades\Route::has('tourism.index') ? route('tourism.index') : url('/tourism');
+    @endphp
     <div class="text-end mb-5">
-        <a href="{{ route('tourism.index') }}" class="btn btn-outline-secondary">ดูสถานที่ทั้งหมด</a>
+        <a href="{{ $tourismUrl }}" class="btn btn-outline-secondary">ดูสถานที่ทั้งหมด</a>
     </div>
 
     <!-- เพิ่ม CSS -->

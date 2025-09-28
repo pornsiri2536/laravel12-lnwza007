@@ -129,13 +129,19 @@
                     </li>
 
                     <!-- เมนู ข่าวการท่องเที่ยว -->
+                    @php
+                        $tourismNewsUrl = \Illuminate\Support\Facades\Route::has('tourism-news.index') ? route('tourism-news.index') : url('/tourism-news');
+                    @endphp
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('tourism-news*') ? 'active' : '' }}" href="{{ route('tourism-news.index') }}">🌴 ข่าวการท่องเที่ยว</a>
+                        <a class="nav-link {{ request()->is('tourism-news*') ? 'active' : '' }}" href="{{ $tourismNewsUrl }}">🌴 ข่าวการท่องเที่ยว</a>
                     </li>
 
                     <!-- เมนู สถานที่ท่องเที่ยว -->
+                    @php
+                        $tourismUrl = \Illuminate\Support\Facades\Route::has('tourism.index') ? route('tourism.index') : url('/tourism');
+                    @endphp
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('tourism*') && !request()->is('tourism-news*') ? 'active' : '' }}" href="{{ route('tourism.index') }}">🏞️ สถานที่ท่องเที่ยว</a>
+                        <a class="nav-link {{ request()->is('tourism*') && !request()->is('tourism-news*') ? 'active' : '' }}" href="{{ $tourismUrl }}">🏞️ สถานที่ท่องเที่ยว</a>
                     </li>
 
                     <!-- เมนู เกี่ยวกับเรา -->
@@ -160,15 +166,19 @@
                                     <li><a class="dropdown-item" href="{{ route('admin.content') }}">
                                         <i class="fas fa-edit me-2"></i>จัดการเนื้อหา
                                     </a></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.users') }}">
+                                    <li><a class="dropdown-item" href="{{ route('admin.user_mgmt.index') }}">
                                         <i class="fas fa-users me-2"></i>จัดการผู้ใช้งาน
                                     </a></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.roles') }}">
-                                        <i class="fas fa-user-tag me-2"></i>จัดการ Roles
-                                    </a></li>
-                                    <li><a class="dropdown-item" href="{{ route('admin.permissions') }}">
-                                        <i class="fas fa-key me-2"></i>จัดการ Permissions
-                                    </a></li>
+                                    @if(\Illuminate\Support\Facades\Route::has('admin.roles.index'))
+                                        <li><a class="dropdown-item" href="{{ route('admin.roles.index') }}">
+                                            <i class="fas fa-user-tag me-2"></i>จัดการ Roles
+                                        </a></li>
+                                    @endif
+                                    @if(\Illuminate\Support\Facades\Route::has('admin.permissions.index'))
+                                        <li><a class="dropdown-item" href="{{ route('admin.permissions.index') }}">
+                                            <i class="fas fa-key me-2"></i>จัดการ Permissions
+                                        </a></li>
+                                    @endif
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="{{ route('admin.settings') }}">
                                         <i class="fas fa-cog me-2"></i>การตั้งค่า

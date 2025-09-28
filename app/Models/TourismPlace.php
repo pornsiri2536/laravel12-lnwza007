@@ -13,7 +13,6 @@ class TourismPlace extends Model
         'name',
         'description', 
         'image',
-        'link',
     ];
 
     // เพิ่มข้อมูลสถานที่ท่องเที่ยว
