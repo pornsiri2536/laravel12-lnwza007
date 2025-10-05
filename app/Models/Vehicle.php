@@ -1,10 +1,3 @@
-<?php
+php artisan tinker
+>>> DB::table('roles')->get();
 
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Vehicle extends Model
-{
-    //
-}

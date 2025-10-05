@@ -9,30 +9,13 @@ class TourismPlace extends Model
 {
     use HasFactory;
 
+    protected $table = 'tourism_places'; // ตารางในฐานข้อมูล
     protected $fillable = [
         'name',
-        'description', 
+        'slug',
+        'description',
         'image',
+        'location',
+        'status',
     ];
-
-    // เพิ่มข้อมูลสถานที่ท่องเที่ยว
-    public static function addPlace($data)
-    {
-        return self::create($data);
-    }
-
-    // แก้ไขข้อมูลสถานที่ท่องเที่ยว
-    public static function updatePlace($id, $data)
-    {
-        $place = self::findOrFail($id);
-        $place->update($data);
-        return $place;
-    }
-
-    // ลบข้อมูลสถานที่ท่องเที่ยว
-    public static function deletePlace($id)
-    {
-        $place = self::findOrFail($id);
-        return $place->delete();
-    }
 }

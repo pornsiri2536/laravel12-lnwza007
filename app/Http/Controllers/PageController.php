@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Page;
+use App\Models\Page; // ถ้าคุณมี Model Page ใน DB
 
 class PageController extends Controller
 {
-    public function about()
-    {
-        return view('about'); // โหลดไฟล์ resources/views/about.blade.php
-    }
-
     /**
-     * Show a published page by slug for public site.
+     * แสดงหน้าตาม slug
      */
-    public function show(string $slug)
+    public function show($slug)
     {
-        $page = Page::where('slug', $slug)
-            ->where('is_published', true)
-            ->firstOrFail();
+        // หา Page จาก database ตาม slug
+        $page = Page::where('slug', $slug)->firstOrFail();
 
-        return view('page', compact('page'));
+        // ส่งไปยัง view เช่น resources/views/pages/show.blade.php
+        return view('pages.show', compact('page'));
     }
 }
